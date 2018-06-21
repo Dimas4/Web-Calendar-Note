@@ -1,0 +1,40 @@
+{% extends "home/base.html" %}
+
+{% block content %}
+    <div class="container">
+        <h2 class="alert alert-light">Card: {{ card.title }}</h2>
+        <h4 class="alert alert-dismissible">Description: {{ card.content }}</h4>
+
+        <h1 class="alert alert-info text-center">Events:</h1>
+        <hr>
+
+        <a href="{% url "users_cards:card_add_event" url=card.url %}" class="btn btn-success">Add event</a>
+
+
+        <a href="{% url "users_cards:card_delete" url=card.url %}" class="btn btn-danger">Delete this card</a>
+        <hr>
+
+        {% for obj in objects %}
+        <div class="row">
+             <div class="card testimonial-card" style="min-width: 100%">
+
+                <div class="card-up indigo lighten-1">
+                </div>
+                <div class="avatar mx-auto white"><img src="https://mdbootstrap.com/img/Photos/Avatars/img%20%2810%29.jpg" class="rounded-circle">
+                </div>
+
+                <div class="card-body">
+                    <h3 class="card-title">{{ obj.title }}</h3>
+                    <hr>
+                    <h2>{{ obj.content }}</h2>
+                </div>
+
+            </div>
+        </div>
+        <hr>
+        {% endfor %}
+
+    </div>
+
+
+{% endblock %}
