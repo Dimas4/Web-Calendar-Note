@@ -9,7 +9,8 @@ class CardForm(forms.ModelForm):
         model = Card
         fields = [
             'title',
-            'content'
+            'content',
+            'image'
         ]
 
 
@@ -18,5 +19,6 @@ class EventForm(forms.ModelForm):
         model = Event
         fields = [
             'title',
-            'content'
+            'content',
+            'image'
         ]

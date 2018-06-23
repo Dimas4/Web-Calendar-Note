@@ -6,6 +6,9 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    path('calendar/', include(('userscalendar.urls', 'userscalendar'), namespace='userscalendar')),
+
     path('', include(('users_cards.urls', 'users_cards'), namespace='users_cards')),
 
 ]

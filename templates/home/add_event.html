@@ -4,7 +4,7 @@
     <div class="container">
         <h3 class="alert alert-info">Create event:</h3>
 
-        <form action="{% url "users_cards:card_add_event" url=url %}" method="POST">
+        <form action="{% url "users_cards:card_add_event" url=url %}" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
             <input class="btn btn-success" type="submit" value="Create">

@@ -11,6 +11,8 @@ class Card(models.Model):
     title = models.CharField(max_length=50)
     content = models.TextField()
 
+    image = models.ImageField(upload_to="media", blank=True, null=True)
+
     current_events = GenericRelation(Event)
 
     data = models.DateTimeField(auto_now_add=True)

@@ -1,0 +1,13 @@
+{% extends "home/base.html" %}
+
+{% block content %}
+    <div class="container">
+        <h2 class="alert alert-info">Detail page for {{ obj.day }} day:</h2>
+        <hr>
+        <br>
+        <h3>Event name: {{ obj.name }}</h3>
+        <h4>Description: {{ obj.content }}</h4>
+    </div>
+
+
+{% endblock %}

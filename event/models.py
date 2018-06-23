@@ -9,9 +9,13 @@ class Event(models.Model):
     title = models.CharField(max_length=50)
     content = models.TextField()
 
+    image = models.ImageField(upload_to="media", blank=True, null=True)
+
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_url = models.TextField()
-    content_object = GenericForeignKey('content_type', 'object_url')
+    object_id = models.TextField()
+    content_object = GenericForeignKey('content_type', 'object_id')
+
+    finished = models.BooleanField(default=False)
 
     data = models.DateTimeField(auto_now_add=True)
 

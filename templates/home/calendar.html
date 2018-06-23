@@ -1,0 +1,25 @@
+{% extends "home/base.html" %}
+
+{% block content %}
+    <div class="container">
+            <div class="row">
+                <h3 class="alert alert-info">Calendar:</h3>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-1"></div>
+                {% for obj in objects %}
+                    {% if forloop.counter0|divisibleby:10 %}
+                        </div><br><br><div class="row">
+                    {% endif %}
+                    <div class="col-xs-1" style="word-wrap:break-word;">
+                        <a href="{% url "userscalendar:detail_page" pk=obj.calendar_id id=obj.id %}">
+                            <h2 class="text-center alert alert-success m-1" style="width: 200px;">{{ obj.name|truncatechars:8 }}</h2>
+                        </a>
+                    </div>
+                {% endfor %}
+        </div>
+    </div>
+
+
+{% endblock %}

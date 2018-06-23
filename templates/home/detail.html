@@ -5,36 +5,89 @@
         <h2 class="alert alert-light">Card: {{ card.title }}</h2>
         <h4 class="alert alert-dismissible">Description: {{ card.content }}</h4>
 
-        <h1 class="alert alert-info text-center">Events:</h1>
+        {% if card.image %}
+            <img src="{{ card.image.url }}" class="this text-center rounded-circle">
+        {% endif %}
+        <br>
+
+            <a href="{% url "users_cards:card_add_event" url=card.url %}" class="btn btn-success">Add event</a>
+
+            <a href="{% url "users_cards:card_delete" url=card.url %}" class="btn btn-danger">Delete this card</a>
+
         <hr>
 
-        <a href="{% url "users_cards:card_add_event" url=card.url %}" class="btn btn-success">Add event</a>
-
-
-        <a href="{% url "users_cards:card_delete" url=card.url %}" class="btn btn-danger">Delete this card</a>
+        <h1 class="alert alert-info text-center">Future events:</h1>
         <hr>
 
-        {% for obj in objects %}
+        <style>
+            .this{
+                width: 320px;
+            }
+        </style>
+
         <div class="row">
-             <div class="card testimonial-card" style="min-width: 100%">
+            {% for obj in objects %}
+                {% if not obj.finished %}
+                    {% if forloop.counter0|divisibleby:3 %}
+                        </div><br><br><div class="row">
+                    {% endif %}
+                        <div class="col-xs-4 col-lg-4">
+                            <div class="card card-cascade width_card" style="margin-bottom: 20px; width: 320px;">
+                              <div class="view view-cascade overlay">
+                                  {% if obj.image %}
+                                        <div class="text-center avatar mx-auto white">
+                                            <img src="{{ obj.image.url }}" class="this text-center rounded-circle">
+                                        </div>
+                                    {% endif %}
+                                      <div class="mask flex-center rgba-black-strong">
+                                        <p class="white-text">Title: {{ obj.title }}</p>
+                                    </div>
+                              </div>
+                              <div class="card-body card-body-cascade text-center">
+                                <p class="card-text">Content: {{ obj.content }}</p>
+                                <a class="text-left btn btn-warning" href="{% url "users_cards:event_finished_delete" url=card.url id=obj.id slug='finished' %}">Finished</a>
+                                <a class="text-left btn btn-danger" href="{% url "users_cards:event_finished_delete" url=card.url id=obj.id slug='delete' %}">Delete</a>
 
-                <div class="card-up indigo lighten-1">
-                </div>
-                <div class="avatar mx-auto white"><img src="https://mdbootstrap.com/img/Photos/Avatars/img%20%2810%29.jpg" class="rounded-circle">
-                </div>
-
-                <div class="card-body">
-                    <h3 class="card-title">{{ obj.title }}</h3>
-                    <hr>
-                    <h2>{{ obj.content }}</h2>
-                </div>
+                              </div>
+                            </div>
+                        </div>
+                {% endif %}
+            {% endfor %}
 
             </div>
-        </div>
-        <hr>
-        {% endfor %}
+        <br>
+        <h1 class="alert alert-success text-center">Recent:</h1>
+        <div class="row">
+            {% for obj in objects %}
+                {% if obj.finished %}
+                    {% if forloop.counter0|divisibleby:3 %}
+                            </div><br><br><div class="row">
+                        {% endif %}
+                            <div class="col-xs-4 col-lg-4">
+                                <div class="card card-cascade width_card" style="margin-bottom: 20px; width: 320px;">
+                                  <div class="view view-cascade overlay">
+                                      {% if obj.image %}
+                                            <div class="text-center avatar mx-auto white">
+                                                <img src="{{ obj.image.url }}" class="this text-center rounded-circle">
+                                            </div>
+                                        {% endif %}
+                                          <div class="mask flex-center rgba-black-strong">
+                                            <p class="white-text">Title: {{ obj.title }}</p>
+                                        </div>
+                                  </div>
+                                  <div class="card-body card-body-cascade text-center">
+                                    <p class="card-text">Content: {{ obj.content }}</p>
+                                    <a class="text-left btn btn-warning" href="{% url "users_cards:event_finished_delete" url=card.url id=obj.id slug='finished' %}">Finished</a>
+                                    <a class="text-left btn btn-danger" href="{% url "users_cards:event_finished_delete" url=card.url id=obj.id slug='delete' %}">Delete</a>
 
+                                  </div>
+                                </div>
+                            </div>
+                {% endif %}
+            {% endfor %}
+        </div>
     </div>
+</div>
 
 
 {% endblock %}
