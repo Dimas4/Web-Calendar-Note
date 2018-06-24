@@ -1,9 +1,9 @@
-from django.db import models
 from django.contrib.contenttypes.fields import GenericRelation
-from event.models import Event
-
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.db import models
+
+from event.models import Event
 
 
 class Card(models.Model):

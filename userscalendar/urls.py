@@ -5,7 +5,8 @@ from .views import (
     detail_page,
     month_page,
     create_page,
-    home_page_start
+    home_page_start,
+    edit_page
     )
 
 urlpatterns = [
@@ -13,7 +14,10 @@ urlpatterns = [
     path('create/', create_page, name='create_page'),
 
     re_path('^(?P<slug>[-\w]+)/$', home_page, name='home_page'),
+    path('', home_page, name='home_page'),
+
     re_path('^(?P<url>[-\w]+)/detail/(?P<id>\d+)/$', detail_page, name='detail_page'),
+    re_path('^(?P<url>[-\w]+)/detail/(?P<id>\d+)/edit$', edit_page, name='edit_page'),
     re_path('(?P<url>[-\w]+)/month/(?P<month>[-\w]+)/', month_page, name='month_page'),
 
 ]

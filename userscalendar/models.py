@@ -1,17 +1,18 @@
-from django.db import models
-from django.db.models.signals import pre_save
-from django.dispatch import receiver
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.db import models
 
 
 class Day(models.Model):
     day = models.PositiveIntegerField()
-    month = models.CharField(max_length=20)
+    month = models.CharField(max_length=20, blank=True)
     calendar_url = models.TextField()
     day_in_month = models.PositiveIntegerField()
     name = models.CharField(max_length=50)
     content = models.TextField()
+
+    def get_absolute_url(self, url):
+        return HttpResponseRedirect(reverse("userscalendar:detail_page", kwargs={'url': url, 'id': self.id}))
 
     def get_month(self, url, month):
         if month.title() == "September":
@@ -54,11 +55,3 @@ class Calendar(models.Model):
 
     def __str__(self):
         return str(self.id)
-
-
-class Day_Calendar(models.Model):
-    day_id = models.PositiveIntegerField()
-    calendar_id = models.PositiveIntegerField()
-
-    def __str__(self):
-        return '{} {}'.format(self.day_id, self.calendar_id)
