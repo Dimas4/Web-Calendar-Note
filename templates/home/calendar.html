@@ -12,29 +12,146 @@
             <br>
             <hr>
             <div class="row">
-                    <a class="btn btn-light-blue" href="">September</a>
-                    <a class="btn btn-light-blue" href="">October</a>
-                    <a class="btn btn-light-blue" href="">November</a>
-                    <a class="btn btn-light-blue" href="">December</a>
-                    <a class="btn btn-light-blue" href="">January</a>
-                    <a class="btn btn-light-blue" href="">February</a>
-                    <a class="btn btn-light-blue" href="">Mart</a>
-                    <a class="btn btn-light-blue" href="">April</a>
-                    <a class="btn btn-light-blue" href="">March</a>
-                    <a class="btn btn-light-blue" href="">June</a>
-                    <a class="btn btn-light-blue" href="">July</a>
-                    <a class="btn btn-light-blue" href="">August</a>
+                    <a class="btn btn-light-blue" href="{% url "userscalendar:month_page" url=calendar_url month="September"  %}">September</a>
+                    <a class="btn btn-light-blue" href="{% url "userscalendar:month_page" url=calendar_url month="October"  %}">October</a>
+                    <a class="btn btn-light-blue" href="{% url "userscalendar:month_page" url=calendar_url month="November"  %}">November</a>
+                    <a class="btn btn-light-blue" href="{% url "userscalendar:month_page" url=calendar_url month="December"  %}">December</a>
+                    <a class="btn btn-light-blue" href="{% url "userscalendar:month_page" url=calendar_url month="January"  %}">January</a>
+                    <a class="btn btn-light-blue" href="{% url "userscalendar:month_page" url=calendar_url month="February"  %}">February</a>
+                    <a class="btn btn-light-blue" href="{% url "userscalendar:month_page" url=calendar_url month="Mart"  %}">Mart</a>
+                    <a class="btn btn-light-blue" href="{% url "userscalendar:month_page" url=calendar_url month="April"  %}">April</a>
+                    <a class="btn btn-light-blue" href="{% url "userscalendar:month_page" url=calendar_url month="March"  %}">March</a>
+                    <a class="btn btn-light-blue" href="{% url "userscalendar:month_page" url=calendar_url month="June"  %}">June</a>
+                    <a class="btn btn-light-blue" href="{% url "userscalendar:month_page" url=calendar_url month="July"  %}">July</a>
+                    <a class="btn btn-light-blue" href="{% url "userscalendar:month_page" url=calendar_url month="August"  %}">August</a>
             </div>
             <hr>
             <div class="row">
                 <div class="col-xs-1"></div>
+                <div class="container">
+                            <div class="row">
+                                <br><br>
+                                <h2 class="alert alert-danger">September:</h2>
+                                <br>
+                            </div>
+                        </div>
                 {% for obj in objects %}
                     {% if forloop.counter0|divisibleby:10 %}
-                        </div><br><br><div class="row">
+                        </div><br><br><div class="row" style="margin-bottom: -50px;">
+                    {% endif %}
+                    {% if forloop.counter == 31 %}
+                        <br><br><br><br>
+                        <div class="container">
+                            <div class="row">
+                                <br><br>
+                                <h2 class="alert alert-danger" style="margin-top: 20px;">October:</h2>
+                                <br><br>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if forloop.counter == 62 %}
+                        <br><br><br><br>
+                        <div class="container">
+                            <div class="row">
+                                <br><br>
+                                <h2 class="alert alert-danger">November:</h2>
+                                <br><br>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if forloop.counter == 92 %}
+                        <br><br><br><br>
+                        <div class="container">
+                            <div class="row">
+                                <br><br>
+                                <h2 class="alert alert-danger">December:</h2>
+                                <br><br>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if forloop.counter == 123 %}
+                        <br><br><br><br>
+                        <div class="container">
+                            <div class="row">
+                                <br><br>
+                                <h2 class="alert alert-danger">January:</h2>
+                                <br><br>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if forloop.counter == 154 %}
+                        <br><br><br><br>
+                        <div class="container">
+                            <div class="row">
+                                <br><br>
+                                <h2 class="alert alert-danger">February:</h2>
+                                <br><br>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if forloop.counter == 183 %}
+                        <br><br><br><br>
+                        <div class="container">
+                            <div class="row">
+                                <br><br>
+                                <h2 class="alert alert-danger">March:</h2>
+                                <br><br>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if forloop.counter == 214 %}
+                        <br><br><br><br>
+                        <div class="container">
+                            <div class="row">
+                                <br><br>
+                                <h2 class="alert alert-danger">April:</h2>
+                                <br><br>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if forloop.counter == 244 %}
+                        <br><br><br><br>
+                        <div class="container">
+                            <div class="row">
+                                <br><br>
+                                <h2 class="alert alert-danger">May:</h2>
+                                <br><br>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if forloop.counter == 275 %}
+                        <br><br><br><br>
+                        <div class="container">
+                            <div class="row">
+                                <br><br>
+                                <h2 class="alert alert-danger">June:</h2>
+                                <br><br>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if forloop.counter == 305 %}
+                        <br><br><br><br>
+                        <div class="container">
+                            <div class="row">
+                                <br><br>
+                                <h2 class="alert alert-danger">July:</h2>
+                                <br><br>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if forloop.counter == 336 %}
+                        <br><br><br><br>
+                        <div class="container">
+                            <div class="row">
+                                <br><br>
+                                <h2 class="alert alert-danger">August:</h2>
+                                <br><br>
+                            </div>
+                        </div>
                     {% endif %}
                     <div class="col-xs-1" style="word-wrap:break-word;">
-                        <a href="{% url "userscalendar:detail_page" pk=obj.calendar_id id=obj.id %}">
-                            <h2 class="text-center alert alert-success m-1" style="width: 200px;">{{ obj.name|truncatechars:8 }}</h2>
+                        <a href="{% url "userscalendar:detail_page" url=calendar_url id=obj.id %}">
+                            <h2 class="text-center alert alert-success m-1" style="width: 200px;">{{ obj.day_in_month|truncatechars:8 }}</h2>
                         </a>
                     </div>
                 {% endfor %}

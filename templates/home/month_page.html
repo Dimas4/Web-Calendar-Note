@@ -3,8 +3,13 @@
 {% block content %}
     <div class="container">
         <div class="row">
+            <h2 class="alert alert-info">Detail page for {{ month }}:</h2>
+        </div>
+        <div class="row">
             {% for objects in obj %}
-                {{ objects.name }}
+                <a href="{% url "userscalendar:detail_page" url=objects.calendar_url id=objects.id %}">
+                    <h2 class="text-center alert alert-success m-1" style="width: 200px;"> {{ objects.day_in_month }}|{{ objects.name|truncatechars:8 }}</h2>
+                </a>
             {% endfor %}
         </div>
     </div>

@@ -1,30 +1,53 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Day, Calendar
 from django.http import Http404
+
 import calendar
+import uuid
+
+from .additional import i_to_month_day
+from .forms import CreateCalendarForm
+from .models import Day, Calendar
 
 
-def month_page(request, id, month):
+def home_page_start(request):
+    return render(request, "home/start_page_calendar.html")
+
+
+def create_page(request):
+    form = CreateCalendarForm(request.POST or None)
+    if form.is_valid():
+        new_calendar = form.save(commit=False)
+        new_calendar.url = uuid.uuid4()
+        new_calendar.save()
+        return new_calendar.get_absolute_url()
+
+    context = {
+        "form": form
+    }
+
+    return render(request, "home/create_calendar.html", context)
+
+
+def month_page(request, url, month):
     if month.title() not in ["September", "October", "November",
                      "December", "January", "February",
-                     "Mart", "April", "March", "June",
+                     "March", "April", "May", "June",
                      "July", "August"]:
 
         return Http404
-
-    obj = Day.objects.filter(calendar_id=id)
-    obj = Day.get_month(obj, id, month)
-
+    obj = Day.objects.filter(calendar_url=url)
+    obj = Day.get_month(obj, url, month)
 
     context = {
-        "obj": obj
+        "obj": obj,
+        "month": month.title()
     }
 
     return render(request, "home/month_page.html", context)
 
 
-def detail_page(request, pk, id):
-    obj = Day.objects.get(calendar_id=pk, id=id)
+def detail_page(request, url, id):
+    obj = Day.objects.get(calendar_url=url, id=id)
 
     myCal = calendar.HTMLCalendar(calendar.SUNDAY)
     new = myCal.formatmonth(2009, 7)
@@ -36,65 +59,24 @@ def detail_page(request, pk, id):
     return render(request, "home/detail_calendar.html", context)
 
 
-def i_to_month_day(i):
-    if i in range(1, 31):
-        return i
-
-    if i in range(31, 62):
-        return i - 30
-
-    if i in range(62, 92):
-        return i - 61
-
-    if i in range(92, 123):
-        return i - 91
-
-    if i in range(123, 154):
-        return i - 122
-
-    if i in range(154, 183):
-        return i - 153
-
-    if i in range(183, 214):
-        return i - 182
-
-    if i in range(214, 244):
-        return i - 213
-
-    if i in range(244, 275):
-        return i - 242
-
-    if i in range(275, 305):
-        return i - 273
-
-    if i in range(305, 336):
-        return i - 303
-
-    if i in range(336, 367):
-        return i - 343
-
-
-def home_page(request):
+def home_page(request, slug):
     global obj
 
-    try:
-        calendar = Calendar.objects.get(id=1)
-    except Calendar.DoesNotExist:
-        calendar = Calendar.objects.create(name="First", content="My first calendar")
+    calendar = get_object_or_404(Calendar, url=slug)
 
-    try:
-        obj = Day.objects.filter(calendar_id=calendar.id)
-    except Day.DoesNotExist:
+    obj = Day.objects.filter(calendar_url=slug)
+    if len(obj) == 0:
         obj = Day.objects.bulk_create([
             Day(day=i,
-                calendar_id=calendar.id,
+                calendar_url=slug,
                 day_in_month=i_to_month_day(i),
                 name=str(i),
-                content=str(i)) for i in range(1, 365)
+                content=str(i)) for i in range(1, 367)
         ])
 
     context = {
-        "objects": obj
+        "objects": obj,
+        "calendar_url": slug,
     }
 
     return render(request, "home/calendar.html", context)
