@@ -1,0 +1,12 @@
+{% extends "home/base.html" %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            {% for objects in obj %}
+                {{ objects.name }}
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
