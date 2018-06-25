@@ -12,10 +12,6 @@ from users_cards.forms import EventForm
 from event.models import Event
 
 
-def home_page_start(request):
-    return render(request, "home/start_page_calendar.html")
-
-
 def home_page(request, slug):
     global obj
 
@@ -47,6 +43,7 @@ def create_page(request):
     if form.is_valid():
         new_calendar = form.save(commit=False)
         new_calendar.url = uuid.uuid4()
+        new_calendar.image = form.cleaned_data.get("image")
         new_calendar.save()
         return new_calendar.get_absolute_url()
 
@@ -141,9 +138,9 @@ def event_finished_delete(request, url, id, slug):
 
 def month_page(request, url, month):
     if month.title() not in ["September", "October", "November",
-                     "December", "January", "February",
-                     "March", "April", "May", "June",
-                     "July", "August"]:
+                             "December", "January", "February",
+                             "March", "April", "May", "June",
+                             "July", "August"]:
 
         return Http404
 

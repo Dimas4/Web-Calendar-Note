@@ -7,7 +7,9 @@
         <br>
         <h3>Event name: {{ obj.name }}</h3>
         <h4>Description: {{ obj.content }}</h4>
-        <img src="{{ obj.image.url }}" alt="">
+        {% if obj.image %}
+            <img src="{{ obj.image.url }}" alt="">
+        {% endif %}
         <a class="btn btn-success" href="{% url "userscalendar:create_event" url=url id=obj.id %}">Add new event</a>
         <a class="btn btn-success" href="{% url "userscalendar:edit_page" url=url id=obj.id %}">Edit day</a>
         <br>

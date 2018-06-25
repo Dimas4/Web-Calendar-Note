@@ -7,11 +7,13 @@
             </div>
             <h3 class="alert alert-light">{{ calendar.name }}</h3>
             <h3 class="alert alert-light">{{ calendar.content }}</h3>
-            <img class="this" src="{{ calendar.image.url }}" alt="">
+            {% if calendar.image %}
+                <img class="this" src="{{ calendar.image.url }}" alt="">
+            {% endif %}
             <br><br>
             <style>
                 .this{
-                    width: 320px;
+                    width: 140px;
                 }
             </style>
 

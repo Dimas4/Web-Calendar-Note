@@ -7,12 +7,10 @@ from .views import (
     detail_page,
     create_page,
     create_event,
-    home_page_start,
     event_finished_delete
     )
 
 urlpatterns = [
-    path('', home_page_start, name='home_page_start'),
     path('create/', create_page, name='create_page'),
 
     re_path('^(?P<slug>[-\w]+)/$', home_page, name='home_page'),

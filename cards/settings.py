@@ -40,7 +40,10 @@ INSTALLED_APPS = [
     'users_cards',
     'event',
     'userscalendar',
+    'crispy_forms',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
