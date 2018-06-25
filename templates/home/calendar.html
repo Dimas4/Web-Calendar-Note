@@ -5,6 +5,15 @@
             <div class="row">
                 <h3 class="alert alert-info">Calendar:</h3>
             </div>
+            <h3 class="alert alert-light">{{ calendar.name }}</h3>
+            <h3 class="alert alert-light">{{ calendar.content }}</h3>
+            <img class="this" src="{{ calendar.image.url }}" alt="">
+            <br><br>
+            <style>
+                .this{
+                    width: 320px;
+                }
+            </style>
 
             <div class="row">
                 <h3 class="btn btn-success btn-lg">Select month:</h3>

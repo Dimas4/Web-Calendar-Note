@@ -34,6 +34,7 @@ def home_page(request, slug):
         ])
 
     context = {
+        "calendar": calendar,
         "objects": obj,
         "calendar_url": slug,
     }
@@ -42,7 +43,7 @@ def home_page(request, slug):
 
 
 def create_page(request):
-    form = CreateEditCalendarForm(request.POST or None)
+    form = CreateEditCalendarForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         new_calendar = form.save(commit=False)
         new_calendar.url = uuid.uuid4()

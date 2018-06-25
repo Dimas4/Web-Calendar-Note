@@ -50,6 +50,8 @@ class Calendar(models.Model):
     content = models.TextField()
     day = models.ManyToManyField(Day, blank=True)
 
+    image = models.ImageField(upload_to="media", blank=True, null=True)
+
     def get_absolute_url(self):
         return HttpResponseRedirect(reverse("userscalendar:home_page", kwargs={'slug': self.url}))
 

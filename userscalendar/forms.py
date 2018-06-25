@@ -7,5 +7,6 @@ class CreateEditCalendarForm(forms.ModelForm):
         model = Calendar
         fields = [
             "name",
-            "content"
+            "content",
+            "image"
         ]
