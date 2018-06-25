@@ -19,6 +19,9 @@ class Event(models.Model):
 
     data = models.DateTimeField(auto_now_add=True)
 
+    def get_calendar_url(self, url, id):
+        return HttpResponseRedirect(reverse("userscalendar:detail_page", kwargs={'url': url, 'id': id}))
+
     def get_card_url(self, url):
         return HttpResponseRedirect(reverse("users_cards:card_detail", kwargs={'url': url}))
 

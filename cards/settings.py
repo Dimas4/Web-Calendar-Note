@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users_cards',
     'event',
-    'userscalendar'
+    'userscalendar',
 ]
 
 MIDDLEWARE = [

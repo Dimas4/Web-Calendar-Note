@@ -7,7 +7,81 @@
         <br>
         <h3>Event name: {{ obj.name }}</h3>
         <h4>Description: {{ obj.content }}</h4>
+        <a class="btn btn-success" href="{% url "userscalendar:create_event" url=url id=obj.id %}">Add new event</a>
         <a class="btn btn-success" href="{% url "userscalendar:edit_page" url=url id=obj.id %}">Edit day</a>
+        <br>
+        <a class="btn btn-info" href="{% url "userscalendar:home_page" slug=url %}">Back</a>
+
+        <style>
+            .this{
+                width: 320px;
+            }
+        </style>
+
+        <br><br>
+        <h2 class="alert alert-success text-center">Events:</h2>
+
+        <div class="row">
+            {% for obj in objects %}
+                {% if not obj.finished %}
+                    {% if forloop.counter0|divisibleby:3 %}
+                        </div><br><br><div class="row">
+                    {% endif %}
+                        <div class="col-xs-4 col-lg-4">
+                            <div class="card card-cascade width_card" style="margin-bottom: 20px; width: 320px;">
+                              <div class="view view-cascade overlay">
+                                  {% if obj.image %}
+                                        <div class="text-center avatar mx-auto white">
+                                            <img src="{{ obj.image.url }}" class="this text-center rounded-circle">
+                                        </div>
+                                    {% endif %}
+                                      <div class="mask flex-center rgba-black-strong">
+                                        <p class="white-text">Title: {{ obj.title }}</p>
+                                    </div>
+                              </div>
+                              <div class="card-body card-body-cascade text-center">
+                                <p class="card-text">Content: {{ obj.content }}</p>
+                                <a class="text-left btn btn-warning" href="{% url "userscalendar:event_finished_delete" url=url_id id=obj.id slug="finished" %}">Finished</a>
+                                <a class="text-left btn btn-danger" href="{% url "userscalendar:event_finished_delete" url=url_id id=obj.id slug="delete" %}">Delete</a>
+
+                              </div>
+                            </div>
+                        </div>
+                {% endif %}
+            {% endfor %}
+
+            </div>
+        <br>
+        <h1 class="alert alert-success text-center">Recent:</h1>
+        <div class="row">
+            {% for obj in objects %}
+                {% if obj.finished %}
+                    {% if forloop.counter0|divisibleby:3 %}
+                            </div><br><br><div class="row">
+                        {% endif %}
+                            <div class="col-xs-4 col-lg-4">
+                                <div class="card card-cascade width_card" style="margin-bottom: 20px; width: 320px;">
+                                  <div class="view view-cascade overlay">
+                                      {% if obj.image %}
+                                            <div class="text-center avatar mx-auto white">
+                                                <img src="{{ obj.image.url }}" class="this text-center rounded-circle">
+                                            </div>
+                                        {% endif %}
+                                          <div class="mask flex-center rgba-black-strong">
+                                            <p class="white-text">Title: {{ obj.title }}</p>
+                                        </div>
+                                  </div>
+                                  <div class="card-body card-body-cascade text-center">
+                                    <p class="card-text">Content: {{ obj.content }}</p>
+                                    <a class="text-left btn btn-danger" href="{% url "userscalendar:event_finished_delete" url=url_id id=obj.id slug="delete" %}">Delete</a>
+
+                                  </div>
+                                </div>
+                            </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
     </div>
 
 
